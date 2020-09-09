@@ -37,6 +37,11 @@ class Item(models.Model):
             'slug': self.slug
         })
 
+    def get_remove_from_cart_url(self):
+        return reverse("duka:remove-from-cart", kwargs={
+            'slug': self.slug
+        })
+
 
 class OrderItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -46,7 +51,7 @@ class OrderItem(models.Model):
     quantity = models.IntegerField(default=1)
 
     def __str__(self):
-        return "{self.quantity} of {self.item.title}"
+        return f'''{self.quantity} of {self.item.title}'''
 
 
 class Order(models.Model):
